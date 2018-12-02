@@ -26,7 +26,14 @@ public class ResponseUtils {
     out.println("<html>");
     out.println("<body>");
     out.println("<h1>Server </h1>");
-    out.println("FAIL, send valid request");
+    out.println("FAIL, send valid request with valid data and non null values<br>");
+    out.println("Supported values:<br>");
+    out.println("<ul><li>dataCenterId: any string</li>");
+    out.println("<li>itemType: DATACENTER, SERVER, STORAGE</li>");
+    out.println("<li>itemId: any string</li>");
+    out.println("<li>attachToServerId: any string</li>");
+    out.println("<li>attachToServerId: any string</li>");
+    out.println("<li>action: CREATE, UPDATE, DELETE, MAKE_SNAPSHOT</li></ul>");
     out.println("</body>");
     out.println("</html>");
     System.out.println("INIT " + System.currentTimeMillis());

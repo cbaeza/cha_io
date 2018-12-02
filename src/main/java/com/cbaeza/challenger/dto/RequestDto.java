@@ -11,7 +11,12 @@ public class RequestDto {
   private final String attachToServerId;
   private final Action action;
 
-  public RequestDto(String dataCenterId, ItemType itemType, String itemId, String attachToServerId, Action action) {
+  public RequestDto(
+      String dataCenterId,
+      ItemType itemType,
+      String itemId,
+      String attachToServerId,
+      Action action) {
     this.dataCenterId = dataCenterId;
     this.itemType = itemType;
     this.itemId = itemId;

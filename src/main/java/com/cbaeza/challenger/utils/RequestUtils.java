@@ -48,7 +48,7 @@ public class RequestUtils {
     if (action == null) {
       return null;
     }
-    return Action.valueOf(action);
+    return Action.fromValue(action);
   }
 
   private static ItemType extractItemType(HttpServletRequest req) {
@@ -56,7 +56,7 @@ public class RequestUtils {
     if (itemType == null) {
       return null;
     }
-    return ItemType.valueOf(itemType);
+    return ItemType.fromValue(itemType);
   }
 
 }

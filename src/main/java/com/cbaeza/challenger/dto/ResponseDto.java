@@ -13,8 +13,14 @@ public class ResponseDto {
   private final String status;
   private final String message;
 
-  public ResponseDto(String dataCenterId, ItemType itemType, String itemId, String attachToServerId, Action action,
-      String status, String message) {
+  public ResponseDto(
+      String dataCenterId,
+      ItemType itemType,
+      String itemId,
+      String attachToServerId,
+      Action action,
+      String status,
+      String message) {
     this.dataCenterId = dataCenterId;
     this.itemType = itemType;
     this.itemId = itemId;
