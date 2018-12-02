@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.HttpStatus;
+
 import com.cbaeza.challenger.dto.RequestDto;
 import com.cbaeza.challenger.dto.ResponseDto;
 
@@ -22,6 +24,7 @@ public class ResponseUtils {
   }
 
   public static void fail(HttpServletResponse resp) throws IOException {
+    resp.setStatus(HttpStatus.SC_BAD_REQUEST);
     PrintWriter out = resp.getWriter();
     out.println("<html>");
     out.println("<body>");
@@ -40,7 +43,6 @@ public class ResponseUtils {
   }
 
   public static void ok(HttpServletResponse resp, ResponseDto responseDto) throws IOException {
-    // TODO improve, inform you client via resp object
     PrintWriter out = resp.getWriter();
     out.println("<html>");
     out.println("<body>");

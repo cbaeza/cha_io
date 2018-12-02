@@ -21,4 +21,9 @@ Support for messages of type http POST with follow parameters
 ## Example
     http://localhost:8080/webapp/?action=CREATE&dataCenterId=1&itemId=100&attachToServerId=999&itemType=DATACENTER
     
+    
+## Run integration test
+> mvn clean install -Pit
+    
+    
 

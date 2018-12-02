@@ -22,7 +22,6 @@
         <packaging.type>usr</packaging.type>
     </properties>
 
-
     <build>
         <finalName>webapp</finalName>
         <plugins>
@@ -54,26 +53,7 @@
                         <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                     </systemProperties>
                 </configuration>
-                <!--executions>
-                    <execution>
-                        <id>tomcat-run</id>
-                        <goals>
-                            <goal>run-war-only</goal>
-                        </goals>
-                        <phase>pre-integration-test</phase>
-                        <configuration>
-                            <fork>true</fork>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>tomcat-shutdown</id>
-                        <goals>
-                            <goal>shutdown</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                    </execution>
-                </executions-->
-                <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
+                <!-- dependencies into Tomcat -->
                 <dependencies>
                     <dependency>
                         <groupId>javax.servlet</groupId>
@@ -89,6 +69,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 
@@ -99,6 +80,106 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- For test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>it</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <!-- or if you want to use tomcat 6.x
+                        <artifactId>tomcat6-maven-plugin</artifactId>
+                        -->
+                        <version>2.2</version>
+                        <configuration>
+                            <!-- http port -->
+                            <port>8080</port>
+                            <!-- application path always starts with /-->
+                            <url>http://localhost:8080/manager/text</url>
+                            <server>TomcatServer</server>
+                            <path>/webapp</path>
+                            <systemProperties>
+                                <appserver.base>${project.build.directory}/webapp</appserver.base>
+                                <appserver.home>${project.build.directory}/webapp</appserver.home>
+                                <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
+                            </systemProperties>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>tomcat-run</id>
+                                <goals>
+                                    <goal>run-war-only</goal>
+                                </goals>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <fork>true</fork>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>tomcat-shutdown</id>
+                                <goals>
+                                    <goal>shutdown</goal>
+                                </goals>
+                                <phase>post-integration-test</phase>
+                            </execution>
+                        </executions>
+                        <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.servlet</groupId>
+                                <artifactId>javax.servlet-api</artifactId>
+                                <version>3.1.0</version>
+                                <scope>runtime</scope>
+                            </dependency>
+                            <dependency>
+                                <groupId>javax</groupId>
+                                <artifactId>javaee-api</artifactId>
+                                <version>8.0</version>
+                                <scope>runtime</scope>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <!-- run the server to enable run the IT tests -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <includes>
+                                        <include>**IT</include>
+                                    </includes>
+                                    <systemPropertyVariables>
+                                        <war.name>webapp</war.name>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
