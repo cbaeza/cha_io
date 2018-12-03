@@ -29,8 +29,8 @@ public class ResponseUtils {
     out.println("<html>");
     out.println("<body>");
     out.println("<h1>Server </h1>");
-    out.println("FAIL, send valid request with valid data and non null values<br>");
-    out.println("Supported values:<br>");
+    out.println("FAIL, send a Http POST message with valid data and non null values<br>");
+    out.println("Supported parameter values:<br>");
     out.println("<ul><li>dataCenterId: any string</li>");
     out.println("<li>itemType: DATACENTER, SERVER, STORAGE</li>");
     out.println("<li>itemId: any string</li>");
@@ -39,7 +39,6 @@ public class ResponseUtils {
     out.println("<li>action: CREATE, UPDATE, DELETE, MAKE_SNAPSHOT</li></ul>");
     out.println("</body>");
     out.println("</html>");
-    System.out.println("INIT " + System.currentTimeMillis());
   }
 
   public static void ok(HttpServletResponse resp, ResponseDto responseDto) throws IOException {
@@ -50,6 +49,5 @@ public class ResponseUtils {
     out.println("<h2>" + responseDto.toString() + "</h3>");
     out.println("</body>");
     out.println("</html>");
-    System.out.println("INIT " + System.currentTimeMillis());
   }
 }

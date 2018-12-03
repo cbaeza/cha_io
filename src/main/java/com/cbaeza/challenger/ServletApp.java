@@ -1,6 +1,7 @@
 package com.cbaeza.challenger;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +16,17 @@ import com.cbaeza.challenger.utils.ResponseUtils;
 
 public class ServletApp extends HttpServlet {
 
+  private static Logger LOG = Logger.getLogger(ServletApp.class.getName());
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    doPost(req, resp);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     RequestDto request = RequestUtils.createRequest(req);
-    System.out.println("request " + request);
+    LOG.info("request " + request);
     if (request == null) {
       ResponseUtils.fail(resp);
     } else {
@@ -29,13 +37,8 @@ public class ServletApp extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    doGet(req, resp);
-  }
-
-  @Override
   public void init() throws ServletException {
-    System.out.println("INIT " + System.currentTimeMillis());
+    LOG.info("INIT " + System.currentTimeMillis());
   }
 
 }

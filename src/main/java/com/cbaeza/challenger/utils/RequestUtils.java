@@ -1,5 +1,7 @@
 package com.cbaeza.challenger.utils;
 
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.cbaeza.challenger.dto.RequestDto;
@@ -7,6 +9,8 @@ import com.cbaeza.challenger.model.Action;
 import com.cbaeza.challenger.model.ItemType;
 
 public class RequestUtils {
+
+  private static Logger LOG = Logger.getLogger(RequestUtils.class.getName());
 
   private static final String ATTACH_TO_SERVER_ID = "attachToServerId";
   private static final String ITEM_ID = "itemId";
@@ -20,11 +24,11 @@ public class RequestUtils {
     String itemId = extractItemId(req);
     String attachToServerId = extractAttachToServerId(req);
     ItemType itemType = extractItemType(req);
-    System.out.println("action " + action);
-    System.out.println("dataCenterId " + dataCenterId);
-    System.out.println("itemId " + itemId);
-    System.out.println("attachToServerId " + attachToServerId);
-    System.out.println("itemType " + itemType);
+    LOG.info("action " + action);
+    LOG.info("dataCenterId " + dataCenterId);
+    LOG.info("itemId " + itemId);
+    LOG.info("attachToServerId " + attachToServerId);
+    LOG.info("itemType " + itemType);
     if (action == null || dataCenterId == null || itemId == null || attachToServerId == null || itemType == null) {
       return null;
     }
