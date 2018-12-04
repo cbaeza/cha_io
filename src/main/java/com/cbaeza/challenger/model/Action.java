@@ -9,6 +9,15 @@ public enum Action {
    * Action update
    */
   UPDATE("update"),
+
+  /**
+   * Action attach
+   */
+  ATTACH("attach"),
+  /**
+   * Action detach
+   */
+  DETACH("detach"),
   /**
    * Action delete
    */
@@ -16,7 +25,7 @@ public enum Action {
   /**
    * Action make snapshot
    */
-  MAKE_SNAPSHOT("make_snapshot");
+  TAKE_SNAPSHOT_OF_STORAGE("take_snapshot_of_storage");
 
   private String value;
 

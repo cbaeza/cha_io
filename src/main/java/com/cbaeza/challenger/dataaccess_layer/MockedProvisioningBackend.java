@@ -21,12 +21,19 @@ public class MockedProvisioningBackend {
     case UPDATE:
       handlerUpdate(item, request);
       break;
-    case MAKE_SNAPSHOT:
-      handlerMakeSnapshot(item, request);
+    case ATTACH:
+      handlerAttach(item, request);
+      break;
+    case DETACH:
+      handlerDetach(item, request);
       break;
     case DELETE:
       handlerDelete(item, request);
       break;
+    case TAKE_SNAPSHOT_OF_STORAGE:
+      handlerTakeSnapshotOfStorage(item, request);
+      break;
+
     default:
       return true;
     }
@@ -54,13 +61,33 @@ public class MockedProvisioningBackend {
     }
   }
 
-  private void handlerMakeSnapshot(Item item, RequestDto request) {
+  private void handlerAttach(Item item, RequestDto request) {
+    try {
+      // take some time to process
+      Thread.sleep(150);
+      LOG.info("Item success on " + request.getAction() + " -> " + item);
+    } catch (InterruptedException e) {
+      LOG.info("InterruptedException calling handlerAttach");
+    }
+  }
+
+  private void handlerDetach(Item item, RequestDto request) {
+    try {
+      // take some time to process
+      Thread.sleep(150);
+      LOG.info("Item success on " + request.getAction() + " -> " + item);
+    } catch (InterruptedException e) {
+      LOG.info("InterruptedException calling handlerDetach");
+    }
+  }
+
+  private void handlerTakeSnapshotOfStorage(Item item, RequestDto request) {
     try {
       // take some time to process
       Thread.sleep(500);
       LOG.info("Item success on " + request.getAction() + " -> " + item);
     } catch (InterruptedException e) {
-      LOG.info("InterruptedException calling handlerMakeSnapshot");
+      LOG.info("InterruptedException calling handlerTakeSnapshotOfStorage");
     }
   }
 
