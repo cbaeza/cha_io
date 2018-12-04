@@ -20,7 +20,7 @@ public class ServletApp extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    doPost(req, resp);
+    ResponseUtils.printHelp(resp);
   }
 
   @Override
