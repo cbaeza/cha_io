@@ -35,7 +35,7 @@ public class ServletAppIT {
       int statusCode = client.executeMethod(method);
       assertEquals("HTTP GET failed", HttpStatus.SC_BAD_REQUEST, statusCode);
       String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("FAIL"));
+      assertTrue("Unexpected message", response.contains("Please send a Http POST message with valid data and non null values"));
     } finally {
       method.releaseConnection();
     }

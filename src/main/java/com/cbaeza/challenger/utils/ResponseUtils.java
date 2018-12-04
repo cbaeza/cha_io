@@ -25,10 +25,10 @@ public class ResponseUtils {
 
   public static void fail(HttpServletResponse resp) throws IOException {
     resp.setStatus(HttpStatus.SC_BAD_REQUEST);
-    printHelp(resp);
+    printInfo(resp);
   }
 
-    public static void printHelp(HttpServletResponse resp) throws IOException {
+  public static void printHelp(HttpServletResponse resp) throws IOException {
     resp.setStatus(HttpStatus.SC_OK);
     printInfo(resp);
   }
@@ -38,7 +38,7 @@ public class ResponseUtils {
     out.println("<html>");
     out.println("<body>");
     out.println("<h1>Server </h1>");
-    out.println("Please send a Http POST message with valid data and non null values<br>");
+    out.println("Please send a Http POST message with valid data and non null values.<br>");
     out.println("Supported request parameter values are:<br>");
     out.println("<ul><li>dataCenterId: any string</li>");
     out.println("<li>itemType: DATACENTER, SERVER, STORAGE</li>");
@@ -51,6 +51,7 @@ public class ResponseUtils {
   }
 
   public static void ok(HttpServletResponse resp, ResponseDto responseDto) throws IOException {
+    resp.setStatus(HttpStatus.SC_OK);
     PrintWriter out = resp.getWriter();
     out.println("<html>");
     out.println("<body>");
