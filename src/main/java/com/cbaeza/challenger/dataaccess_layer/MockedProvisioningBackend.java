@@ -15,6 +15,7 @@ public class MockedProvisioningBackend {
     try {
       // take some time to process (1 second)
       Thread.sleep(1000);
+      LOG.info("Item success processed -> " + item);
     } catch (InterruptedException e) {
       LOG.info("InterruptedException calling MockedProvisioningBackend");
     }
