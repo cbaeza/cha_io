@@ -4,12 +4,12 @@
 How to compile and run
 > mvn clean package tomcat7:run -pl :challenger-ionos -am
 
-then open you web browser or http client like Postman and request against: 
+then send with a http client like Postman a http POST message to: 
     
     http://localhost:8080/webapp/
 
 
-Support for messages of type http POST with follow parameters
+Supported parameter values are:
 
     - dataCenterId: any string
     - itemType: DATACENTER, SERVER, STORAGE
@@ -20,6 +20,8 @@ Support for messages of type http POST with follow parameters
     
 ## Example
     http://localhost:8080/webapp/?action=CREATE&dataCenterId=1&itemId=100&attachToServerId=999&itemType=DATACENTER
+    
+![Example using Postman](Example_post.png)
     
     
 ## Run integration test
