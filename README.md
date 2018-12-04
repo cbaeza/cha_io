@@ -16,7 +16,7 @@ Supported parameter values are:
     - itemId: any string
     - attachToServerId: any string
     - attachToServerId: any string
-    - action: CREATE, UPDATE, DELETE, MAKE_SNAPSHOT
+    - action: CREATE, UPDATE, ATTACH, DETACH, DELETE, TAKE_SNAPSHOT_OF_STORAGE
     
 ## Example
     http://localhost:8080/webapp/?action=CREATE&dataCenterId=1&itemId=100&attachToServerId=999&itemType=DATACENTER
