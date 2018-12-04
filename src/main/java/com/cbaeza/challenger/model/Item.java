@@ -4,30 +4,24 @@ public class Item {
 
   private String id;
   private String description;
+  private ItemType itemType;
 
-  public Item(String id, String description) {
+  public Item(String id, String description, ItemType itemType) {
     this.id = id;
     this.description = description;
-  }
-
-  public static Item empty() {
-    return new Item("", "");
+    this.itemType = itemType;
   }
 
   public String getId() {
     return id;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
   public String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public ItemType getItemType() {
+    return itemType;
   }
 
   @Override
@@ -35,6 +29,7 @@ public class Item {
     return "Item{" +
         "id='" + id + '\'' +
         ", description='" + description + '\'' +
+        ", itemType=" + itemType +
         '}';
   }
 }

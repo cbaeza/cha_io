@@ -7,6 +7,8 @@ import com.cbaeza.challenger.dataaccess_layer.MockedProvisioningBackend;
 import com.cbaeza.challenger.dto.RequestDto;
 import com.cbaeza.challenger.dto.ResponseDto;
 import com.cbaeza.challenger.model.Item;
+import com.cbaeza.challenger.model.ItemType;
+import com.cbaeza.challenger.model.Status;
 import com.cbaeza.challenger.utils.ResponseUtils;
 
 public class LockingDelimiterService {
@@ -20,14 +22,20 @@ public class LockingDelimiterService {
   public ResponseDto processRequest(RequestDto request) {
     lock.lock();
     String itemId = request.getItemId();
-    Item item = itemService.retrieveItem(itemId);
-    boolean success = mockedProvisioningBackend.forwardItem(item);
+    ItemType itemType = request.getItemType();
+    Item item = itemService.retrieveItem(itemId, itemType);
+    if (item == null) {
+      return ResponseUtils.success(request, Status.ITEM_NOT_FOUND,
+          "Item not found");
+    }
+    boolean success = mockedProvisioningBackend.forwardItem(item, request);
     lock.unlock();
-
     if (success) {
-      return ResponseUtils.success(request, "200", "Success processed!");
+      return ResponseUtils.success(request, Status.PROCESSED,
+          "Success on " + request.getAction() + " -> " + item);
     } else {
-      return ResponseUtils.success(request, "200", "Retrieved Item can't be null");
+      return ResponseUtils.success(request, Status.NO_PROCESSED,
+          "Nothing has been done. Fail on MockedProvisioningBackend");
     }
   }
 }

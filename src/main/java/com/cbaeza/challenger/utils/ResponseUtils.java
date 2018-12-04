@@ -9,10 +9,11 @@ import org.apache.commons.httpclient.HttpStatus;
 
 import com.cbaeza.challenger.dto.RequestDto;
 import com.cbaeza.challenger.dto.ResponseDto;
+import com.cbaeza.challenger.model.Status;
 
 public class ResponseUtils {
 
-  public static ResponseDto success(RequestDto requestDto, String status, String message) {
+  public static ResponseDto success(RequestDto requestDto, Status status, String message) {
     return new ResponseDto(
         requestDto.getDataCenterId(),
         requestDto.getItemType(),

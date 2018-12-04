@@ -2,6 +2,7 @@ package com.cbaeza.challenger.dto;
 
 import com.cbaeza.challenger.model.Action;
 import com.cbaeza.challenger.model.ItemType;
+import com.cbaeza.challenger.model.Status;
 
 public class ResponseDto {
 
@@ -10,7 +11,7 @@ public class ResponseDto {
   private final String itemId;
   private final String attachToServerId;
   private final Action action;
-  private final String status;
+  private final Status status;
   private final String message;
 
   public ResponseDto(
@@ -19,7 +20,7 @@ public class ResponseDto {
       String itemId,
       String attachToServerId,
       Action action,
-      String status,
+      Status status,
       String message) {
     this.dataCenterId = dataCenterId;
     this.itemType = itemType;
@@ -50,7 +51,7 @@ public class ResponseDto {
     return action;
   }
 
-  public String getStatus() {
+  public Status getStatus() {
     return status;
   }
 
