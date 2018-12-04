@@ -2,7 +2,7 @@
 ## Carlos Baeza - carlos.baeza@posteo.de
 
 How to compile and run
-> mvn clean package tomcat7:run -pl :challenger-ionos -am
+> mvn clean package tomcat7:run -pl :challenger-ionos
 
 then send with a http client like Postman a http POST message to: 
     
