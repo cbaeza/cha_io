@@ -28,7 +28,7 @@ public class LockingDelimiterService {
   /**
    * Retrieve the item using {@link ItemService} and forward the item to the
    * {@link MockedProvisioningBackend}. Lock the procedure to avoid another
-   * service or Thread to use the same item ath the same time
+   * service or Thread to use the same item at the same time
    *
    * @param request the {@link RequestDto}
    * @return the {@link ResponseDto}
