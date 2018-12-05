@@ -15,10 +15,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Tomcat properties -->
+        <webapp.name>webapp</webapp.name>
         <tomcat.port>8080</tomcat.port>
         <tomcat.deploy.url>http://localhost:${tomcat.port}/manager/text</tomcat.deploy.url>
         <!-- artifacts versions -->
-        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <javaee-api.version>8.0</javaee-api.version>
@@ -28,16 +28,8 @@
     </properties>
 
     <build>
-        <finalName>webapp</finalName>
+        <finalName>${webapp.name}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <packagingExcludes>pom.xml</packagingExcludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -46,10 +38,10 @@
                     <port>${tomcat.port}</port>
                     <url>${tomcat.deploy.url}</url>
                     <server>TomcatServer</server>
-                    <path>/webapp</path>
+                    <path>/${webapp.name}</path>
                     <systemProperties>
-                        <appserver.base>${project.build.directory}/webapp</appserver.base>
-                        <appserver.home>${project.build.directory}/webapp</appserver.home>
+                        <appserver.base>${project.build.directory}/${webapp.name}</appserver.base>
+                        <appserver.home>${project.build.directory}/${webapp.name}</appserver.home>
                         <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                     </systemProperties>
                 </configuration>
@@ -109,8 +101,8 @@
                             <server>TomcatServer</server>
                             <path>/webapp</path>
                             <systemProperties>
-                                <appserver.base>${project.build.directory}/webapp</appserver.base>
-                                <appserver.home>${project.build.directory}/webapp</appserver.home>
+                                <appserver.base>${project.build.directory}/${webapp.name}</appserver.base>
+                                <appserver.home>${project.build.directory}/${webapp.name}</appserver.home>
                                 <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                             </systemProperties>
                         </configuration>
@@ -166,7 +158,7 @@
                                         <include>**IT</include>
                                     </includes>
                                     <systemPropertyVariables>
-                                        <war.name>webapp</war.name>
+                                        <war.name>${webapp.name}</war.name>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>
