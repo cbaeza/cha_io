@@ -11,6 +11,12 @@ import com.cbaeza.challenger.model.ItemType;
 import com.cbaeza.challenger.model.Status;
 import com.cbaeza.challenger.utils.ResponseUtils;
 
+/**
+ * The LockingDelimiterService is responsible to lock a Item and forward the
+ * item to the MockedProvisioningBackend
+ * 
+ * @since 1.0
+ */
 public class LockingDelimiterService {
   private final MockedProvisioningBackend mockedProvisioningBackend = new MockedProvisioningBackend();
   private final ItemService itemService = new ItemService();
@@ -19,11 +25,19 @@ public class LockingDelimiterService {
   public LockingDelimiterService() {
   }
 
+  /**
+   * Retrieve the item using {@link ItemService} and forward the item to the
+   * {@link MockedProvisioningBackend}. Lock the procedure to avoid another
+   * service or Thread to use the same item ath the same time
+   *
+   * @param request the {@link RequestDto}
+   * @return the {@link ResponseDto}
+   */
   public ResponseDto processRequest(RequestDto request) {
     lock.lock();
     String itemId = request.getItemId();
     ItemType itemType = request.getItemType();
-    Item item = itemService.retrieveItem(itemId, itemType);
+    final Item item = itemService.retrieveItem(itemId, itemType);
     if (item == null) {
       return ResponseUtils.success(request, Status.ITEM_NOT_FOUND,
           "Item not found");

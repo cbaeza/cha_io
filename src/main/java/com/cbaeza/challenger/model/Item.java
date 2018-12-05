@@ -1,5 +1,10 @@
 package com.cbaeza.challenger.model;
 
+/**
+ * Class to represent a item
+ * 
+ * @since 1.0
+ */
 public class Item {
 
   private String id;

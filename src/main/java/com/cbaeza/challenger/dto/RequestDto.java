@@ -3,6 +3,9 @@ package com.cbaeza.challenger.dto;
 import com.cbaeza.challenger.model.Action;
 import com.cbaeza.challenger.model.ItemType;
 
+/**
+ * Transport dto of request information
+ */
 public class RequestDto {
 
   private final String dataCenterId;

@@ -1,8 +1,24 @@
 package com.cbaeza.challenger.model;
 
+/**
+ * Enum to represent a status related to request processing
+ *
+ * @since 1.0
+ */
 public enum Status {
 
-  ITEM_NOT_FOUND("Item not found"), PROCESSED("Processed"), NO_PROCESSED("No processed");
+  /**
+   * Item has not been found
+   */
+  ITEM_NOT_FOUND("Item not found"),
+  /**
+   * Item has been processed
+   */
+  PROCESSED("Processed"),
+  /**
+   * Item not processed
+   */
+  NO_PROCESSED("No processed");
 
   private String value;
 

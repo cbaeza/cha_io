@@ -1,5 +1,10 @@
 package com.cbaeza.challenger.model;
 
+/**
+ * Enum to represent a ItemType
+ *
+ * @since 1.0
+ */
 public enum ItemType {
   /**
    * A data center

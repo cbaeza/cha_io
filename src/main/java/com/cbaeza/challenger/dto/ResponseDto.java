@@ -4,6 +4,9 @@ import com.cbaeza.challenger.model.Action;
 import com.cbaeza.challenger.model.ItemType;
 import com.cbaeza.challenger.model.Status;
 
+/**
+ * Transport dto of response information
+ */
 public class ResponseDto {
 
   private final String dataCenterId;

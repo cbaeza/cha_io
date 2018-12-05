@@ -1,5 +1,10 @@
 package com.cbaeza.challenger.model;
 
+/**
+ * Enum to represent a action
+ * 
+ * @since 1.0
+ */
 public enum Action {
   /**
    * Action create

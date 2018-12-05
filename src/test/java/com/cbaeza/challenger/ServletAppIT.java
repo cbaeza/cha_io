@@ -11,6 +11,9 @@ import org.junit.Test;
 import com.cbaeza.challenger.model.Action;
 import com.cbaeza.challenger.model.ItemType;
 
+/**
+ * Integration test for {@link ServletApp}
+ */
 public class ServletAppIT {
 
   private static String URL = "http://localhost:8080/webapp/";

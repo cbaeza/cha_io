@@ -14,15 +14,34 @@ import com.cbaeza.challenger.service.LockingDelimiterService;
 import com.cbaeza.challenger.utils.RequestUtils;
 import com.cbaeza.challenger.utils.ResponseUtils;
 
+/**
+ * Main entry point of the IONOS coding challenge
+ * 
+ * @since 1.0
+ */
 public class ServletApp extends HttpServlet {
 
   private static Logger LOG = Logger.getLogger(ServletApp.class.getName());
 
+  /**
+   * Handle http request of type GET
+   *
+   * @param req the {@link HttpServletRequest}
+   * @param resp the {@link HttpServletResponse}
+   * @throws IOException throws IOException
+   */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     ResponseUtils.printHelp(resp);
   }
 
+    /**
+     * Handle http request of type POST
+     *
+     * @param req the {@link HttpServletRequest}
+     * @param resp the {@link HttpServletResponse}
+     * @throws IOException throws IOException
+     */
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     RequestDto request = RequestUtils.createRequest(req);
