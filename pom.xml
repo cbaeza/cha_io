@@ -14,12 +14,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <app.name>${project.artifactId}</app.name>
-        <testServerHttpPort>9080</testServerHttpPort>
-        <testServerHttpsPort>9443</testServerHttpsPort>
-        <warContext>${app.name}</warContext>
-        <package.file>${project.build.directory}/${app.name}.zip</package.file>
-        <packaging.type>usr</packaging.type>
+        <!-- Tomcat properties -->
+        <tomcat.port>8080</tomcat.port>
+        <tomcat.deploy.url>http://localhost:${tomcat.port}/manager/text</tomcat.deploy.url>
+        <!-- artifacts versions -->
+        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
+        <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <javaee-api.version>8.0</javaee-api.version>
+        <junit.version>4.12</junit.version>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+        <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
     </properties>
 
     <build>
@@ -28,7 +33,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>${maven-war-plugin.version}</version>
                 <configuration>
                     <packagingExcludes>pom.xml</packagingExcludes>
                 </configuration>
@@ -36,15 +41,10 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <!-- or if you want to use tomcat 6.x
-                <artifactId>tomcat6-maven-plugin</artifactId>
-                -->
-                <version>2.2</version>
+                <version>${tomcat7-maven-plugin.version}</version>
                 <configuration>
-                    <!-- http port -->
-                    <port>8080</port>
-                    <!-- application path always starts with /-->
-                    <url>http://localhost:8080/manager/text</url>
+                    <port>${tomcat.port}</port>
+                    <url>${tomcat.deploy.url}</url>
                     <server>TomcatServer</server>
                     <path>/webapp</path>
                     <systemProperties>
@@ -53,23 +53,22 @@
                         <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                     </systemProperties>
                 </configuration>
-                <!-- dependencies into Tomcat -->
+                <!-- dependencies to run embedded Tomcat -->
                 <dependencies>
                     <dependency>
                         <groupId>javax.servlet</groupId>
                         <artifactId>javax.servlet-api</artifactId>
-                        <version>3.1.0</version>
+                        <version>${javax.servlet-api.version}</version>
                         <scope>runtime</scope>
                     </dependency>
                     <dependency>
                         <groupId>javax</groupId>
                         <artifactId>javaee-api</artifactId>
-                        <version>8.0</version>
+                        <version>${javaee-api.version}</version>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
             </plugin>
-
         </plugins>
     </build>
 
@@ -77,7 +76,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -85,13 +84,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>${commons-httpclient.version}</version>
         </dependency>
     </dependencies>
 
@@ -103,15 +102,10 @@
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>
                         <artifactId>tomcat7-maven-plugin</artifactId>
-                        <!-- or if you want to use tomcat 6.x
-                        <artifactId>tomcat6-maven-plugin</artifactId>
-                        -->
-                        <version>2.2</version>
+                        <version>${tomcat7-maven-plugin.version}</version>
                         <configuration>
-                            <!-- http port -->
-                            <port>8080</port>
-                            <!-- application path always starts with /-->
-                            <url>http://localhost:8080/manager/text</url>
+                            <port>${tomcat.port}</port>
+                            <url>${tomcat.deploy.url}</url>
                             <server>TomcatServer</server>
                             <path>/webapp</path>
                             <systemProperties>
@@ -139,18 +133,18 @@
                                 <phase>post-integration-test</phase>
                             </execution>
                         </executions>
-                        <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
+                        <!-- dependencies to run embedded Tomcat -->
                         <dependencies>
                             <dependency>
                                 <groupId>javax.servlet</groupId>
                                 <artifactId>javax.servlet-api</artifactId>
-                                <version>3.1.0</version>
+                                <version>${javax.servlet-api.version}</version>
                                 <scope>runtime</scope>
                             </dependency>
                             <dependency>
                                 <groupId>javax</groupId>
                                 <artifactId>javaee-api</artifactId>
-                                <version>8.0</version>
+                                <version>${javaee-api.version}</version>
                                 <scope>runtime</scope>
                             </dependency>
                         </dependencies>
@@ -159,7 +153,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.19.1</version>
+                        <version>${maven-failsafe-plugin.version}</version>
                         <executions>
                             <execution>
                                 <goals>
