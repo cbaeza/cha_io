@@ -3,7 +3,6 @@ package com.cbaeza.challenger;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,13 +34,13 @@ public class ServletApp extends HttpServlet {
     ResponseUtils.printHelp(resp);
   }
 
-    /**
-     * Handle http request of type POST
-     *
-     * @param req the {@link HttpServletRequest}
-     * @param resp the {@link HttpServletResponse}
-     * @throws IOException throws IOException
-     */
+  /**
+   * Handle http request of type POST
+   *
+   * @param req the {@link HttpServletRequest}
+   * @param resp the {@link HttpServletResponse}
+   * @throws IOException throws IOException
+   */
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     RequestDto request = RequestUtils.createRequest(req);
@@ -54,10 +53,4 @@ public class ServletApp extends HttpServlet {
       ResponseUtils.ok(resp, responseDto);
     }
   }
-
-  @Override
-  public void init() throws ServletException {
-    LOG.info("INIT " + System.currentTimeMillis());
-  }
-
 }
