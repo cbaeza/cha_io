@@ -114,6 +114,7 @@
                                 <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
                             </systemProperties>
                         </configuration>
+                        <!-- run the server to enable run the IT tests -->
                         <executions>
                             <execution>
                                 <id>tomcat-run</id>
@@ -149,7 +150,7 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                    <!-- run the server to enable run the IT tests -->
+                    <!-- then run the IT tests -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>

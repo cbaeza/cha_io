@@ -1,8 +1,9 @@
 # IONOS Coding challenge - Java
 ## Carlos Baeza - carlos.baeza@posteo.de
 
-How to compile and run
-> mvn clean package tomcat7:run -pl :challenger-ionos
+## How to compile and run
+Runs the current project as a dynamic web application using an embedded Tomcat server.
+> mvn clean package tomcat7:run
 
 then send with a http client like Postman a http POST message to: 
     
