@@ -1,14 +1,11 @@
 package com.cbaeza.challenger;
 
+import static io.restassured.RestAssured.delete;
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.post;
+import static io.restassured.RestAssured.put;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
 
 import com.cbaeza.challenger.model.Action;
@@ -22,197 +19,107 @@ public class ServletAppIT {
   private static String URL = "http://localhost:8080/webapp/";
 
   @Test
-  public void testCreateServer() throws Exception {
-    HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
-        URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.SERVER);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("CREATE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("SERVER"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testWithAssure() {
+    String body = get(URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.SERVER).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("CREATE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("SERVER"));
   }
 
   @Test
-  public void testCreateStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
-        URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("CREATE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testCreateServer() {
+    String body = post(URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.SERVER).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("CREATE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("SERVER"));
   }
 
   @Test
-  public void testDeleteServer() throws Exception {
-    HttpClient client = new HttpClient();
-    DeleteMethod method = new DeleteMethod(
-        URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.SERVER);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("DELETE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("SERVER"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testCreateStorage() {
+    String body = post(URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.STORAGE).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("CREATE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
   }
 
   @Test
-  public void testDeleteStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    DeleteMethod method = new DeleteMethod(
-        URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("DELETE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testDeleteServer() {
+    String body = delete(URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.SERVER).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("DELETE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("SERVER"));
   }
 
   @Test
-  public void testDeleteDataCenter() throws Exception {
-    HttpClient client = new HttpClient();
-    DeleteMethod method = new DeleteMethod(
-        URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.DATACENTER);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("DELETE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("DATACENTER"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testDeleteStorage() {
+    String body = delete(URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.STORAGE).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("DELETE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
   }
 
   @Test
-  public void testAttachStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
-        URL + "?action=" + Action.ATTACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("ATTACH"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testDeleteDataCenter() {
+    String body = delete(URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.DATACENTER).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("DELETE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("DATACENTER"));
   }
 
   @Test
-  public void testDetachStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
-        URL + "?action=" + Action.DETACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("DETACH"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testAttachStorage() {
+    String body = post(URL + "?action=" + Action.ATTACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.STORAGE).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("ATTACH"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
   }
 
   @Test
-  public void testUpdateServer() throws Exception {
-    HttpClient client = new HttpClient();
-    PutMethod method = new PutMethod(
-        URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.SERVER);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("UPDATE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("SERVER"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testDetachStorage() {
+    String body = post(URL + "?action=" + Action.DETACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.STORAGE).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("DETACH"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
   }
 
   @Test
-  public void testUpdateStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    PutMethod method = new PutMethod(
-        URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
-            + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("UPDATE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testUpdateServer() {
+    String body = put(URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.SERVER).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("UPDATE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("SERVER"));
   }
 
   @Test
-  public void testTakeSnapshotOfStorage() throws Exception {
-    HttpClient client = new HttpClient();
-    GetMethod method = new GetMethod(
-        URL + "?action=" + Action.TAKE_SNAPSHOT_OF_STORAGE
-            + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType=" + ItemType.STORAGE);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP POST success", HttpStatus.SC_OK, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message", response.contains("TAKE_SNAPSHOT_OF_STORAGE"));
-      assertTrue("Unexpected message", response.contains("PROCESSED"));
-      assertTrue("Unexpected message", response.contains("STORAGE"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testUpdateStorage() {
+    String body = put(URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
+        + ItemType.STORAGE).then().statusCode(200).extract().body().asString();
+    assertTrue("Unexpected message", body.contains("UPDATE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
   }
 
   @Test
-  public void testInValidRequest() throws Exception {
-    HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(URL);
-    try {
-      int statusCode = client.executeMethod(method);
-      assertEquals("HTTP GET failed", HttpStatus.SC_BAD_REQUEST, statusCode);
-      String response = method.getResponseBodyAsString(1000);
-      assertTrue("Unexpected message",
-          response.contains("Please send a Http POST message with valid data and non null values"));
-    } finally {
-      method.releaseConnection();
-    }
+  public void testTakeSnapshotOfStorage() {
+    String body = get(URL + "?action=" + Action.TAKE_SNAPSHOT_OF_STORAGE
+        + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType=" + ItemType.STORAGE).then().statusCode(200)
+            .extract().body().asString();
+    assertTrue("Unexpected message", body.contains("TAKE_SNAPSHOT_OF_STORAGE"));
+    assertTrue("Unexpected message", body.contains("PROCESSED"));
+    assertTrue("Unexpected message", body.contains("STORAGE"));
+  }
+
+  @Test
+  public void testInValidRequest() {
+    post(URL).then().statusCode(400);
   }
 }
