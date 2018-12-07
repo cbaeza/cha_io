@@ -34,22 +34,26 @@ public class LockingDelimiterService {
    * @return the {@link ResponseDto}
    */
   public ResponseDto processRequest(RequestDto request) {
-    lock.lock();
-    String itemId = request.getItemId();
-    ItemType itemType = request.getItemType();
-    final Item item = itemService.retrieveItem(itemId, itemType);
-    if (item == null) {
-      return ResponseUtils.success(request, Status.ITEM_NOT_FOUND,
-          "Item not found");
+    try {
+      lock.lock();
+      String itemId = request.getItemId();
+      ItemType itemType = request.getItemType();
+      final Item item = itemService.retrieveItem(itemId, itemType);
+      if (item == null) {
+        return ResponseUtils.success(request, Status.ITEM_NOT_FOUND,
+            "Item not found");
+      }
+      boolean success = mockedProvisioningBackend.forwardItem(item, request);
+      if (success) {
+        return ResponseUtils.success(request, Status.PROCESSED,
+            "Success on " + request.getAction() + " -> " + item);
+      } else {
+        return ResponseUtils.success(request, Status.NO_PROCESSED,
+            "Nothing has been done. Fail on MockedProvisioningBackend");
+      }
+    } finally {
+      lock.unlock();
     }
-    boolean success = mockedProvisioningBackend.forwardItem(item, request);
-    lock.unlock();
-    if (success) {
-      return ResponseUtils.success(request, Status.PROCESSED,
-          "Success on " + request.getAction() + " -> " + item);
-    } else {
-      return ResponseUtils.success(request, Status.NO_PROCESSED,
-          "Nothing has been done. Fail on MockedProvisioningBackend");
-    }
+
   }
 }
