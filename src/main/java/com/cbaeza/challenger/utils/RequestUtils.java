@@ -36,11 +36,8 @@ public class RequestUtils {
     String itemId = extractItemId(req);
     String attachToServerId = extractAttachToServerId(req);
     ItemType itemType = extractItemType(req);
-    LOG.info("action " + action);
-    LOG.info("dataCenterId " + dataCenterId);
-    LOG.info("itemId " + itemId);
-    LOG.info("attachToServerId " + attachToServerId);
-    LOG.info("itemType " + itemType);
+    LOG.info("action " + action + ", dataCenterId " + dataCenterId + ", itemId " + itemId + ", attachToServerId "
+        + attachToServerId + ", itemType " + itemType);
     if (action == null || dataCenterId == null || itemId == null || attachToServerId == null || itemType == null) {
       return null;
     }
