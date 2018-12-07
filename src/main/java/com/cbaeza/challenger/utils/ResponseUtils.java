@@ -97,7 +97,7 @@ public class ResponseUtils {
     out.println("<li>itemId: any string</li>");
     out.println("<li>attachToServerId: any string</li>");
     out.println("<li>attachToServerId: any string</li>");
-    out.println("<li>action: CREATE, UPDATE, DELETE, TAKE_SNAPSHOT_OF_STORAGE</li></ul>");
+    out.println("<li>action: CREATE, UPDATE, ATTACH, DETACH, DELETE, TAKE_SNAPSHOT_OF_STORAGE</li></ul>");
     out.println("</body>");
     out.println("</html>");
   }
