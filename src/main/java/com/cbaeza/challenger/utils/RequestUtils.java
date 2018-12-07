@@ -16,7 +16,6 @@ import com.cbaeza.challenger.model.ItemType;
 public class RequestUtils {
 
   private static Logger LOG = Logger.getLogger(RequestUtils.class.getName());
-
   private static final String ATTACH_TO_SERVER_ID = "attachToServerId";
   private static final String ITEM_ID = "itemId";
   private static final String DATA_CENTER_ID = "dataCenterId";

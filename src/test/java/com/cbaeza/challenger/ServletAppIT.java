@@ -5,7 +5,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.DeleteMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.PutMethod;
 import org.junit.Test;
 
 import com.cbaeza.challenger.model.Action;
@@ -19,7 +22,7 @@ public class ServletAppIT {
   private static String URL = "http://localhost:8080/webapp/";
 
   @Test
-  public void testPostCreateServer() throws Exception {
+  public void testCreateServer() throws Exception {
     HttpClient client = new HttpClient();
     PostMethod method = new PostMethod(
         URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
@@ -37,7 +40,7 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostCreateStorage() throws Exception {
+  public void testCreateStorage() throws Exception {
     HttpClient client = new HttpClient();
     PostMethod method = new PostMethod(
         URL + "?action=" + Action.CREATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
@@ -55,9 +58,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostDeleteServer() throws Exception {
+  public void testDeleteServer() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    DeleteMethod method = new DeleteMethod(
         URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
             + ItemType.SERVER);
     try {
@@ -73,9 +76,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostDeleteStorage() throws Exception {
+  public void testDeleteStorage() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    DeleteMethod method = new DeleteMethod(
         URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
             + ItemType.STORAGE);
     try {
@@ -91,9 +94,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostDeleteDataCenter() throws Exception {
+  public void testDeleteDataCenter() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    DeleteMethod method = new DeleteMethod(
         URL + "?action=" + Action.DELETE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
             + ItemType.DATACENTER);
     try {
@@ -109,7 +112,7 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostAttachStorage() throws Exception {
+  public void testAttachStorage() throws Exception {
     HttpClient client = new HttpClient();
     PostMethod method = new PostMethod(
         URL + "?action=" + Action.ATTACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
@@ -127,7 +130,7 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostDetachStorage() throws Exception {
+  public void testDetachStorage() throws Exception {
     HttpClient client = new HttpClient();
     PostMethod method = new PostMethod(
         URL + "?action=" + Action.DETACH + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
@@ -145,9 +148,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostUpdateServer() throws Exception {
+  public void testUpdateServer() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    PutMethod method = new PutMethod(
         URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
             + ItemType.SERVER);
     try {
@@ -163,9 +166,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostUpdateStorage() throws Exception {
+  public void testUpdateStorage() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    PutMethod method = new PutMethod(
         URL + "?action=" + Action.UPDATE + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType="
             + ItemType.STORAGE);
     try {
@@ -181,9 +184,9 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostTakeSnapshotOfStorage() throws Exception {
+  public void testTakeSnapshotOfStorage() throws Exception {
     HttpClient client = new HttpClient();
-    PostMethod method = new PostMethod(
+    GetMethod method = new GetMethod(
         URL + "?action=" + Action.TAKE_SNAPSHOT_OF_STORAGE
             + "&dataCenterId=1&itemId=100&attachToServerId=999&itemType=" + ItemType.STORAGE);
     try {
@@ -199,7 +202,7 @@ public class ServletAppIT {
   }
 
   @Test
-  public void testPostInValidRequest() throws Exception {
+  public void testInValidRequest() throws Exception {
     HttpClient client = new HttpClient();
     PostMethod method = new PostMethod(URL);
     try {

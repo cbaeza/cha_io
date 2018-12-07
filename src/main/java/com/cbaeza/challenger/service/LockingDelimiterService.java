@@ -18,11 +18,13 @@ import com.cbaeza.challenger.utils.ResponseUtils;
  * @since 1.0
  */
 public class LockingDelimiterService {
-  private final MockedProvisioningBackend mockedProvisioningBackend = new MockedProvisioningBackend();
-  private final ItemService itemService = new ItemService();
+  private final MockedProvisioningBackend mockedProvisioningBackend;
+  private final ItemService itemService;
   private Lock lock = new ReentrantLock();
 
-  public LockingDelimiterService() {
+  public LockingDelimiterService(MockedProvisioningBackend mockedProvisioningBackend, ItemService itemService) {
+    this.mockedProvisioningBackend = mockedProvisioningBackend;
+    this.itemService = itemService;
   }
 
   /**
