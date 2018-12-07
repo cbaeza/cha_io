@@ -33,6 +33,10 @@ Supported parameter values are:
     
 ## Run integration test
 > mvn clean verify -Pit
+
+## Future improvements
+- Send request parameters into request body and de/serialize in server side using GSON
+- Use Spring RestController
     
     
 
