@@ -16,7 +16,7 @@ import com.cbaeza.challenger.utils.RequestUtils;
 import com.cbaeza.challenger.utils.ResponseUtils;
 
 /**
- * Main entry point of the IONOS coding challenge GET/POST/PUT/PATCH/DELETE
+ * Main entry point of the IONOS coding challenge
  * 
  * @since 1.0
  */
