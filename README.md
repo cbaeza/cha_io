@@ -1,4 +1,3 @@
-# IONOS Coding challenge - Java
 ## Carlos Baeza - carlos.baeza@posteo.de
 
 ## How to compile, execute junit tests and run
